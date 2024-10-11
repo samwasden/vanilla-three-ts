@@ -12,6 +12,17 @@ function main() {
     1000
   );
 
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  const ambientLight = new THREE.AmbientLight(0xffffff);
+
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+  const cube = new THREE.Mesh(geometry, material);
+
+  scene.add(cube);
+  scene.add(light);
+  scene.add(ambientLight);
+
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
@@ -20,6 +31,10 @@ function main() {
 
   function animate() {
     requestAnimationFrame(animate);
+
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
     renderer.render(scene, camera);
   }
 
